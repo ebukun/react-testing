@@ -1,9 +1,15 @@
 import React, {useState} from "react";
 
+export function replaceCamelWithSpace(colorName) {
+	return colorName.replace(/\B([A-Z])\B/g, " $1");
+}
+
 const ButtonPage = () => {
-	const [color, setColor] = useState("red");
+	const [color, setColor] = useState("MediumVioletRed");
 	const [disabled, setDisabled] = useState(false);
-	const newbuttonColor = color === "red" ? "blue" : "red";
+	const newbuttonColor = color === "MediumVioletRed" ? "MidnightBlue" : "MediumVioletRed";
+
+	// console.log(replaceCamelWithSpace("MediumVioletRed"));
 
 	return (
 		<div>
@@ -11,10 +17,10 @@ const ButtonPage = () => {
 				onClick={() => {
 					setColor(newbuttonColor);
 				}}
-				style={{backgroundColor: color}}
+				style={{backgroundColor: disabled ? "gray" : color}}
 				disabled={disabled}
 			>
-				Change to {newbuttonColor}
+				Change to {replaceCamelWithSpace(newbuttonColor)}
 			</button>
 			<div>
 				<input
@@ -22,7 +28,9 @@ const ButtonPage = () => {
 					defaultChecked={disabled}
 					type="checkbox"
 					aria-checked={disabled}
-					onChange={(e) => setDisabled(e.target.checked)}
+					onChange={(e) => {
+						setDisabled(e.target.checked);
+					}}
 				/>
 				<label htmlFor="disable-checkbox">Disable button</label>
 			</div>
