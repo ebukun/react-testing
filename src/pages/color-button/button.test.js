@@ -17,7 +17,7 @@ test("button has correct initial color", () => {
 	expect(colorButton).toHaveStyle({background: "MidnightBlue"});
 
 	//expect the btn text to be "Change to red"
-	expect(colorButton.textContent).toBe("Change to Medium Violet Red");
+	expect(colorButton).toHaveTextContent("Change to Medium Violet Red");
 });
 
 test("inital condition", () => {
@@ -46,7 +46,7 @@ test("checkbox disables button on first click and enables on second click ", () 
 	expect(button).toBeEnabled();
 });
 
-test("test that color of button changes when the button is disabled ", () => {
+test("test that color of button changes when it is disabled ", () => {
 	render(<ButtonPage />);
 
 	//find DOM element
