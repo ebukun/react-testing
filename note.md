@@ -65,7 +65,15 @@ _BDD_
 - complex logic difficult to test vai functional tests
 - Too many edge cases
 
-
 _When to unit test_
 
+# Screen Query Method
 
+- command
+
+* get: expect element to be in DOM
+* query: expect element not to be in DOM
+* find : expect elements to apper async
+
+- ALL
+  getAll - expects more than one match

@@ -1,10 +1,11 @@
-import "./App.css";
-import ButtonPage from "./pages/color-button/ButtonPage";
+// import ButtonPage from "./pages/color-button/ButtonPage";
+import SummaryForm from "./pages/Summary/SummaryForm";
 
 function App() {
 	return (
 		<div className="App">
-			<ButtonPage />
+			{/* <ButtonPage /> */}
+			<SummaryForm />
 		</div>
 	);
 }
