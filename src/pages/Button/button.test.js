@@ -1,5 +1,5 @@
 import {render, screen, fireEvent} from "@testing-library/react";
-import ButtonPage, {replaceCamelWithSpace} from "./ButtonPage";
+import ButtonPage, {replaceCamelWithSpace} from "./Button";
 
 test("button has correct initial color", () => {
 	render(<ButtonPage />);

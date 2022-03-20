@@ -77,3 +77,8 @@ _When to unit test_
 
 - ALL
   getAll - expects more than one match
+
+#
+
+- test.only to run only one test
+- test.skip to run all tests but skip that test
