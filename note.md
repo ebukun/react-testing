@@ -40,7 +40,7 @@ _Acceptance/End-to-end(E2E)_ tests- use actual browser and server (Cypress, sele
 
 # Functional Testing vs Unit Testing
 
-_Unit Testing_ : Isolated: mock dependencies, test internals
+_Unit Testing_ : Isolated: mock dependencies (props, params, argument), test internals
 
 - very easy to pinpoint failures (Good side)
 - further from how users interact with the software (Bad side)

@@ -2,12 +2,16 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import ScoopOptions from "./ScoopOptions";
 import ToppingOptions from "./ToppingOptions";
-import {Container, SimpleGrid, Text} from "@chakra-ui/react";
+import {Container, SimpleGrid} from "@chakra-ui/react";
 import AlertBanner from "../../components/AlertBanner";
+import {pricePerItem} from "../../constant";
+import {useOrderDetails} from "../../context/OrderDetails";
 
 const Options = ({optionType}) => {
 	const [items, setItems] = useState([]);
 	const [error, setError] = useState(false);
+
+	const [orderDetails, updateItemCount] = useOrderDetails();
 
 	const getScoop = async () => {
 		try {
@@ -23,24 +27,30 @@ const Options = ({optionType}) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [optionType]);
 
-	const ItemComponent = optionType === "scoops" ? ScoopOptions : ToppingOptions;
-
 	if (error) {
 		return <AlertBanner />;
 	}
 
+	const ItemComponent = optionType === "scoops" ? ScoopOptions : ToppingOptions;
+	const title = optionType === "scoops" ? "Scoops" : "Toppings";
+
+	const optionItems = items.map((item) => (
+		<ItemComponent
+			key={item.name}
+			name={item.name}
+			imagePath={item.imagePath}
+			updateItemCount={(itemName, itemCount) => updateItemCount(itemName, itemCount, optionType)}
+		/>
+	));
+
 	return (
 		<Container>
-			<div>
-				<Text fontSize="50px" color="tomato">
-					{optionType === "scoops" ? "Scooping" : "Toppings"}
-				</Text>
-				<SimpleGrid columns={3} spacing={10}>
-					{items.map((item) => (
-						<ItemComponent key={item.name} name={item.name} imagePath={item.imagePath} />
-					))}
-				</SimpleGrid>
-			</div>
+			<h2>{title}</h2>
+			<p>{pricePerItem[optionType]} each</p>
+			<p>
+				{title} total {orderDetails.totals[optionType]}
+			</p>
+			<div>{optionItems}</div>
 		</Container>
 	);
 };
