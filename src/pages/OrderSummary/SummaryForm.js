@@ -11,7 +11,7 @@ import {
 	PopoverCloseButton,
 } from "@chakra-ui/react";
 
-const SummaryForm = () => {
+const SummaryForm = ({setOrderPhase}) => {
 	const [tcchecked, setTcChecked] = useState(false);
 
 	const checkboxLabel = (
@@ -29,10 +29,16 @@ const SummaryForm = () => {
 			</Popover>
 		</>
 	);
+
+	function confirmOrder(e) {
+		e.preventDefault();
+		console.log("hitting here");
+		setOrderPhase("completed");
+	}
 	return (
 		<div className="summary">
 			<div className="summary-order">
-				<form>
+				<form onSubmit={confirmOrder}>
 					<div className="summary-order-checkbox">
 						<Checkbox
 							isChecked={tcchecked}
@@ -44,7 +50,7 @@ const SummaryForm = () => {
 							{checkboxLabel}
 						</Checkbox>
 					</div>
-					<Button variant={"solid"} colorScheme="blue" isDisabled={!tcchecked}>
+					<Button type="submit" variant={"solid"} colorScheme="blue" isDisabled={!tcchecked}>
 						Confirm Order
 					</Button>
 				</form>

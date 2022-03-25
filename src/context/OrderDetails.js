@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {createContext, useContext, useState, useMemo, useEffect} from "react";
 import {pricePerItem} from "../constant";
-import { formatCurrency } from "../util";
+import {formatCurrency} from "../util";
 
 const orderDetails = createContext();
 
@@ -57,12 +57,19 @@ const OrderDetailsProvider = (props) => {
 		setOptionCounts(newOptionCounts);
 	}
 
+	function resetOrder() {
+		setOptionCounts({
+			scoops: new Map(),
+			toppings: new Map(),
+		});
+	}
+
 	useEffect(() => {
 		getStateTotal();
 	}, [optionCounts]);
 
 	const value = useMemo(() => {
-		return [{...optionCounts, totals}, updateItemCount];
+		return [{...optionCounts, totals}, updateItemCount, resetOrder];
 	}, [optionCounts, totals]);
 
 	return <orderDetails.Provider value={value} {...props} />;

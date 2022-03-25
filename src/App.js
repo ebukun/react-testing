@@ -1,17 +1,32 @@
-// import ButtonPage from "./pages/color-button/ButtonPage";
-import Options from "./pages/Entry/Options";
-import SummaryForm from "./pages/Summary/SummaryForm";
-import OrderEntry from "./pages/Entry/OrderEntry";
+import OrderEntry from "./pages/OrderEntry/OrderEntry";
+import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
+import OrderSummary from "./pages/OrderSummary/OrderSummary";
 import {OrderDetailsProvider} from "./context/OrderDetails";
 import {ChakraProvider} from "@chakra-ui/react";
-// import ScoopOptions from "./pages/Entry/ScoopOptions";
+import {useState} from "react";
 
 function App() {
+	const [orderPhase, setOrderPhase] = useState("inProgress");
+
+	function viewComponent() {
+		if (orderPhase === "review") {
+			return OrderSummary;
+		}
+		if (orderPhase === "completed") {
+			return OrderConfirmation;
+		}
+		return OrderEntry;
+	}
+
+	const Component = viewComponent();
+
 	return (
-		<div className="App">
+		<div className="app">
 			<OrderDetailsProvider>
 				<ChakraProvider>
-					<OrderEntry />
+					<div className="app-container">
+						<Component setOrderPhase={setOrderPhase} />
+					</div>
 				</ChakraProvider>
 			</OrderDetailsProvider>
 		</div>

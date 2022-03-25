@@ -1,9 +1,9 @@
 import {useOrderDetails} from "../../context/OrderDetails";
 import Options from "./Options";
 import "../../styles/pages/OrderEntry.scss";
-import {Heading} from "@chakra-ui/react";
+import {Button, Heading} from "@chakra-ui/react";
 
-const OrderEntry = () => {
+const OrderEntry = ({setOrderPhase}) => {
 	const [orderDetails] = useOrderDetails();
 	return (
 		<div className="order__entry">
@@ -16,6 +16,9 @@ const OrderEntry = () => {
 			<Heading as="h4" mb="5">
 				Grand total: {orderDetails.totals.grandTotal}
 			</Heading>
+			<Button variant={"solid"} colorScheme="blue" onClick={() => setOrderPhase("review")}>
+				Place Order
+			</Button>
 		</div>
 	);
 };
