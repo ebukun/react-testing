@@ -32,7 +32,6 @@ const SummaryForm = ({setOrderPhase}) => {
 
 	function confirmOrder(e) {
 		e.preventDefault();
-		console.log("hitting here");
 		setOrderPhase("completed");
 	}
 	return (

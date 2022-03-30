@@ -7,11 +7,19 @@ import {
 	NumberInputField,
 	NumberInputStepper,
 } from "@chakra-ui/react";
-import React from "react";
+import React, {useState} from "react";
 
 const ScoopOptions = ({name, imagePath, updateItemCount}) => {
+	const [isValid, setIsValid] = useState(false);
 	const updateScoop = (value) => {
-		updateItemCount(name, value);
+		const currentValue = parseFloat(value);
+		const valueIsValid =
+			0 <= currentValue && currentValue <= 10 && Math.floor(currentValue) === currentValue;
+		setIsValid(valueIsValid);
+
+		if (valueIsValid) {
+			updateItemCount(name, value);
+		}
 	};
 	return (
 		<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
@@ -34,9 +42,9 @@ const ScoopOptions = ({name, imagePath, updateItemCount}) => {
 			<Box mt="4">
 				<NumberInput
 					size="lg"
-					defaultValue={0}
+					defaultValue={2}
 					max={10}
-					min={0}
+					min={1}
 					inputMode="number"
 					onChange={(value) => {
 						updateScoop(value);

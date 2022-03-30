@@ -32,7 +32,7 @@ const Options = ({optionType}) => {
 		return (
 			<AlertBanner
 				variant={"error"}
-				message={"An unexpected error occurred. localhost:3030 is not connected."}
+				message={"An unexpected error occurred. localhost server is not connected."}
 			/>
 		);
 	}
